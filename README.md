@@ -14,4 +14,8 @@ You answer four questions about what kind of work you enjoy (real-time monitorin
 
 Both versions contain the same eight roles and scoring logic; the HTML version is purely for a nicer, shareable interface.
 
+
+I can do this thoos from my newe account real bayulus
+
 **Just added this right now for testing opurpose
+
