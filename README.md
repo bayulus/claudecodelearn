@@ -13,3 +13,5 @@ You answer four questions about what kind of work you enjoy (real-time monitorin
 - **[career-analysis.html](career-analysis.html)** — browser version with the same quiz logic, styled as a personnel-intake "dossier." No install needed — just open it in any browser.
 
 Both versions contain the same eight roles and scoring logic; the HTML version is purely for a nicer, shareable interface.
+
+**Just added this right now for testing opurpose
