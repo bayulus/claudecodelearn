@@ -1,0 +1,844 @@
+<title>Security Career Dossier</title>
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-2: #f5f7fa;
+    --border: #d7dde4;
+    --text: #1b222b;
+    --text-2: #5b6672;
+    --accent: #a8641b;
+    --accent-strong: #8a5115;
+    --accent-soft: #f2e2c8;
+    --accent-ink: #ffffff;
+    --shadow: 0 1px 2px rgba(20, 24, 30, 0.06), 0 8px 24px rgba(20, 24, 30, 0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10151c;
+      --surface: #161d26;
+      --surface-2: #1c2430;
+      --border: #2a3441;
+      --text: #e8ecf1;
+      --text-2: #94a3b4;
+      --accent: #e8a33d;
+      --accent-strong: #f4b658;
+      --accent-soft: #3c2c14;
+      --accent-ink: #14100a;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #10151c;
+    --surface: #161d26;
+    --surface-2: #1c2430;
+    --border: #2a3441;
+    --text: #e8ecf1;
+    --text-2: #94a3b4;
+    --accent: #e8a33d;
+    --accent-strong: #f4b658;
+    --accent-soft: #3c2c14;
+    --accent-ink: #14100a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(20px, 5vw, 48px) clamp(16px, 4vw, 24px) 64px;
+  }
+
+  /* ---------- Letterhead ---------- */
+
+  .letterhead {
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+
+  .letterhead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(1.35rem, 3.4vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 4px 0 6px;
+  }
+
+  .dek {
+    color: var(--text-2);
+    font-size: 0.9375rem;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .case-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--text-2);
+    text-align: right;
+    white-space: nowrap;
+    line-height: 1.6;
+  }
+
+  .case-tag b { color: var(--text); font-weight: 600; }
+
+  .letterhead-rule {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 16px 0 12px;
+  }
+
+  .letterhead-note {
+    font-size: 0.8125rem;
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  /* ---------- Progress ---------- */
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 2px 14px;
+    gap: 12px;
+  }
+
+  .progress-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+
+  .ticks {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .tick {
+    height: 5px;
+    flex: 1;
+    max-width: 56px;
+    background: var(--border);
+    border-radius: 1px;
+    transition: background 0.25s ease;
+  }
+
+  .tick.done { background: var(--accent); }
+  .tick.current { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+
+  /* ---------- Card ---------- */
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 26px 24px;
+  }
+
+  .q-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .q-text {
+    font-size: 1.1875rem;
+    font-weight: 500;
+    text-wrap: balance;
+    margin: 0 0 20px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    padding: 13px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .option:hover { border-color: var(--accent); }
+
+  .option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .option .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .option.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .option.selected .num {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border);
+  }
+
+  button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 11px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.15s ease, opacity 0.15s ease;
+  }
+
+  button:active { transform: translateY(1px); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 1px solid var(--accent);
+  }
+
+  .btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-2); }
+
+  .btn-ghost:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ---------- Results ---------- */
+
+  .results-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .results-head h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .results-head span {
+    font-size: 0.8125rem;
+    color: var(--text-2);
+  }
+
+  .role-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .role-row.top { border-left-color: var(--accent); }
+
+  .role-summary {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    color: var(--text);
+  }
+
+  .role-rank {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-2);
+    width: 1.6em;
+  }
+
+  .role-row.top .role-rank { color: var(--accent); }
+
+  .role-main { min-width: 0; }
+
+  .role-name {
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .role-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .role-bar-track {
+    height: 5px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    max-width: 260px;
+    overflow: hidden;
+  }
+
+  .role-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .tier-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .chevron {
+    font-size: 0.75rem;
+    color: var(--text-2);
+    transition: transform 0.2s ease;
+    justify-self: end;
+  }
+
+  .role-row.open .chevron { transform: rotate(180deg); }
+
+  .role-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .role-row.open .role-detail { max-height: 900px; }
+
+  .role-detail-inner {
+    padding: 4px 20px 22px;
+    border-top: 1px dashed var(--border);
+    margin: 0 18px;
+  }
+
+  .detail-summary {
+    color: var(--text-2);
+    font-size: 0.9375rem;
+    margin: 14px 0 18px;
+  }
+
+  .detail-section {
+    margin-bottom: 16px;
+  }
+
+  .detail-section:last-child { margin-bottom: 0; }
+
+  .detail-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .detail-section ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .detail-section li {
+    font-size: 0.875rem;
+    margin-bottom: 5px;
+  }
+
+  .onramp-box {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 0.875rem;
+    color: var(--text);
+  }
+
+  .restart-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  @media (max-width: 480px) {
+    .role-summary { grid-template-columns: auto 1fr auto; }
+    .tier-pill { display: none; }
+    .case-tag { text-align: left; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<div class="wrap">
+
+  <header class="letterhead">
+    <div class="letterhead-top">
+      <div>
+        <div class="eyebrow">Personnel Intake &middot; Security Division</div>
+        <h1>Security Career Dossier</h1>
+        <p class="dek">A short intake interview matches what you enjoy to a cybersecurity assignment — then briefs you on what that role actually does.</p>
+      </div>
+      <div class="case-tag" id="caseTag"></div>
+    </div>
+    <hr class="letterhead-rule">
+    <p class="letterhead-note">Four prompts. Answer as it applies to you — there is no wrong assignment, only a better fit.</p>
+  </header>
+
+  <main id="app"></main>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ROLES = {
+    "SOC Analyst": {
+      code: "SOC-01",
+      tier: "Entry",
+      summary: "Front-line defender who watches alerts and traffic in real time to catch attacks as they happen.",
+      dayToDay: [
+        "Monitor SIEM dashboards (Splunk, Sentinel, QRadar) for suspicious alerts",
+        "Triage alerts to separate false positives from real incidents",
+        "Escalate confirmed incidents to Tier 2/3 or the DFIR team",
+        "Write shift notes and basic incident tickets"
+      ],
+      skills: ["Networking fundamentals (TCP/IP, DNS, HTTP)", "Log analysis", "SIEM tools", "Basic scripting (Python/PowerShell)"],
+      onramp: "Entry-level friendly. Certs like Security+ or CySA+, plus a home lab (Blue Team Labs, LetsDefend), are common starting points."
+    },
+    "DFIR (Digital Forensics & Incident Response)": {
+      code: "DFIR-02",
+      tier: "Intermediate",
+      summary: "The investigator who steps in after something bad happens: figures out what occurred, how far it spread, and how to clean it up.",
+      dayToDay: [
+        "Analyze compromised systems, memory dumps, and disk images",
+        "Reconstruct attacker timelines from logs and artifacts",
+        "Contain and eradicate active threats during an incident",
+        "Write formal incident reports for leadership, legal, or clients"
+      ],
+      skills: ["Forensic tools (Volatility, Autopsy, EnCase)", "Deep OS internals (Windows/Linux)", "Log correlation", "Calm, methodical thinking under pressure"],
+      onramp: "Usually a step up from SOC or sysadmin work. Certs: GCFA, GCIH, GNFA. Practice with forensic CTFs (CyberDefenders, DFIR.Training)."
+    },
+    "Penetration Tester / Red Teamer": {
+      code: "RED-03",
+      tier: "Intermediate",
+      summary: "The ethical attacker: gets paid to break into systems before real criminals do, then reports how.",
+      dayToDay: [
+        "Scope and run authorized attacks against networks, apps, or physical sites",
+        "Exploit vulnerabilities to demonstrate real business impact",
+        "Write detailed reports with reproduction steps and fixes",
+        "Stay current on new exploits, tools, and techniques"
+      ],
+      skills: ["Offensive tools (Metasploit, Burp Suite, Cobalt Strike)", "Scripting / exploit development", "Web, network, and AD attack techniques", "Clear technical writing"],
+      onramp: "Certs: PJPT, OSCP, eJPT. Practice on HackTheBox and TryHackMe. A bug-bounty track record also opens doors."
+    },
+    "Threat Intelligence Analyst": {
+      code: "INT-04",
+      tier: "Intermediate",
+      summary: "The researcher who studies attackers themselves — who they are, what they want, and what they'll likely do next.",
+      dayToDay: [
+        "Track threat actor groups, malware families, and campaigns",
+        "Turn raw intel (IOCs, TTPs) into reports decision-makers can act on",
+        "Brief SOC/DFIR teams on emerging threats relevant to the org",
+        "Map adversary behavior using frameworks like MITRE ATT&CK"
+      ],
+      skills: ["OSINT research", "Malware behavior analysis", "Structured writing and briefing", "MITRE ATT&CK, Diamond Model"],
+      onramp: "Certs: GCTI. Writing skill matters as much as technical skill — start by following threat research blogs and drafting your own IOC reports."
+    },
+    "Security Engineer": {
+      code: "ENG-05",
+      tier: "Advanced",
+      summary: "The builder who designs and hardens the systems and defenses everyone else relies on.",
+      dayToDay: [
+        "Design and deploy security tooling (firewalls, EDR, IAM, SIEM pipelines)",
+        "Automate detection and response with code",
+        "Harden infrastructure and review architecture for security gaps",
+        "Partner with IT and dev teams to bake security into new systems"
+      ],
+      skills: ["Automation (Python, Terraform)", "Cloud platforms (AWS/Azure/GCP)", "Systems/network administration", "Security architecture"],
+      onramp: "Often a path from sysadmin or DevOps. Certs: Security+, AWS/Azure security certs, GSEC."
+    },
+    "Application Security (AppSec) Engineer": {
+      code: "APP-06",
+      tier: "Intermediate",
+      summary: "The specialist who makes sure software itself isn't the weak link — finding and fixing flaws in code before attackers do.",
+      dayToDay: [
+        "Perform code reviews and static/dynamic analysis (SAST/DAST)",
+        "Threat-model new features during design",
+        "Work with developers to fix vulnerabilities (SQLi, XSS, auth flaws)",
+        "Build secure coding guidelines and CI/CD security gates"
+      ],
+      skills: ["Programming (JavaScript, Python, Java, etc.)", "OWASP Top 10", "Static/dynamic analysis tools", "Collaboration with dev teams"],
+      onramp: "A natural fit for developers moving into security. Certs: eWPT, OSWE. Practice on OWASP Juice Shop and PortSwigger's Web Security Academy."
+    },
+    "GRC (Governance, Risk & Compliance) Analyst": {
+      code: "GRC-07",
+      tier: "Entry",
+      summary: "The strategist who makes sure the organization meets security standards, manages risk, and stays out of legal trouble.",
+      dayToDay: [
+        "Assess compliance against frameworks (ISO 27001, NIST, SOC 2, PCI-DSS)",
+        "Run risk assessments and track remediation plans",
+        "Write and maintain security policies",
+        "Coordinate audits with internal and external stakeholders"
+      ],
+      skills: ["Compliance frameworks", "Risk assessment methods", "Policy writing", "Communicating with non-technical stakeholders"],
+      onramp: "A good fit for detail-oriented, people-facing thinkers. Certs: CISA, CRISC, ISO 27001 Lead Auditor."
+    },
+    "Cloud Security Engineer": {
+      code: "CLD-08",
+      tier: "Advanced",
+      summary: "The specialist who secures apps and data running in AWS/Azure/GCP instead of traditional on-prem networks.",
+      dayToDay: [
+        "Audit cloud configurations for misconfigurations (open S3 buckets, over-permissive IAM)",
+        "Implement cloud-native security tools (CSPM, CWPP)",
+        "Secure CI/CD pipelines and infrastructure-as-code",
+        "Respond to cloud-specific incidents"
+      ],
+      skills: ["Deep knowledge of one or more cloud platforms", "IAM design", "Infrastructure as code (Terraform)", "Container/Kubernetes security"],
+      onramp: "Certs: AWS Certified Security - Specialty, Azure Security Engineer. Best approached after general cloud or security fundamentals."
+    }
+  };
+
+  var QUESTIONS = [
+    {
+      text: "What sounds most satisfying to you?",
+      options: [
+        ["Catching something bad happening right now", {"SOC Analyst": 3, "DFIR (Digital Forensics & Incident Response)": 1}],
+        ["Digging into what already happened and piecing the story together", {"DFIR (Digital Forensics & Incident Response)": 3, "Threat Intelligence Analyst": 1}],
+        ["Breaking into a system before the bad guys do", {"Penetration Tester / Red Teamer": 3}],
+        ["Studying attackers and predicting their next move", {"Threat Intelligence Analyst": 3}],
+        ["Building tools and systems that prevent problems in the first place", {"Security Engineer": 3, "Cloud Security Engineer": 1}],
+        ["Reviewing code and fixing security bugs in software", {"Application Security (AppSec) Engineer": 3}],
+        ["Making sure the organization follows the rules and manages risk", {"GRC (Governance, Risk & Compliance) Analyst": 3}]
+      ]
+    },
+    {
+      text: "Which work style fits you best?",
+      options: [
+        ["Fast-paced, real-time monitoring and quick decisions", {"SOC Analyst": 3}],
+        ["Slow, methodical investigation with attention to detail", {"DFIR (Digital Forensics & Incident Response)": 3, "GRC (Governance, Risk & Compliance) Analyst": 1}],
+        ["Creative problem solving, thinking like an adversary", {"Penetration Tester / Red Teamer": 3}],
+        ["Research and writing reports or briefings", {"Threat Intelligence Analyst": 3}],
+        ["Hands-on building and automating infrastructure", {"Security Engineer": 3, "Cloud Security Engineer": 2}],
+        ["Reading and writing code", {"Application Security (AppSec) Engineer": 3}],
+        ["Talking with people about policies and audits", {"GRC (Governance, Risk & Compliance) Analyst": 3}]
+      ]
+    },
+    {
+      text: "Which of these have you already enjoyed doing, even informally?",
+      options: [
+        ["Watching logs or dashboards, or setting up home-lab alerts", {"SOC Analyst": 3}],
+        ["Recovering deleted files or digging into a weird system issue", {"DFIR (Digital Forensics & Incident Response)": 3}],
+        ["CTFs, HackTheBox, or trying to bypass restrictions", {"Penetration Tester / Red Teamer": 3}],
+        ["Reading about hacker groups, malware, or breach reports", {"Threat Intelligence Analyst": 3}],
+        ["Writing scripts to automate a repetitive task", {"Security Engineer": 2, "Cloud Security Engineer": 2, "Application Security (AppSec) Engineer": 1}],
+        ["Building or debugging an app or website", {"Application Security (AppSec) Engineer": 3}],
+        ["Organizing documents, processes, or checklists", {"GRC (Governance, Risk & Compliance) Analyst": 3}],
+        ["Working inside AWS, Azure, or GCP", {"Cloud Security Engineer": 3}]
+      ]
+    },
+    {
+      text: "Which statement describes your ideal impact?",
+      options: [
+        ["I stop the attack while it's happening", {"SOC Analyst": 3}],
+        ["I find the full truth after an incident and help recover", {"DFIR (Digital Forensics & Incident Response)": 3}],
+        ["I find the hole before someone else exploits it", {"Penetration Tester / Red Teamer": 3, "Application Security (AppSec) Engineer": 1}],
+        ["I help others understand the threat landscape", {"Threat Intelligence Analyst": 3}],
+        ["I make systems resilient by design", {"Security Engineer": 3, "Cloud Security Engineer": 2}],
+        ["I make sure the organization is compliant and low-risk", {"GRC (Governance, Risk & Compliance) Analyst": 3}]
+      ]
+    }
+  ];
+
+  var state = {
+    step: 0,
+    picks: new Array(QUESTIONS.length).fill(null),
+    view: "quiz"
+  };
+
+  var app = document.getElementById("app");
+
+  function stampCaseTag() {
+    var d = new Date();
+    var pad = function (n) { return String(n).padStart(2, "0"); };
+    var stamp = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+    var suffix = pad(d.getHours()) + pad(d.getMinutes());
+    document.getElementById("caseTag").innerHTML =
+      "CASE NO. <b>SC-" + stamp + "-" + suffix + "</b><br>OPENED " +
+      d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  }
+
+  function computeScores() {
+    var scores = {};
+    Object.keys(ROLES).forEach(function (r) { scores[r] = 0; });
+    state.picks.forEach(function (pick) {
+      if (!pick) return;
+      Object.keys(pick).forEach(function (role) {
+        scores[role] += pick[role];
+      });
+    });
+    return scores;
+  }
+
+  function renderProgress() {
+    var ticks = "";
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      var cls = "tick";
+      if (i < state.step) cls += " done";
+      else if (i === state.step) cls += " current";
+      ticks += '<div class="' + cls + '"></div>';
+    }
+    return (
+      '<div class="progress-row">' +
+        '<div class="progress-label">Prompt ' + (state.step + 1) + ' of ' + QUESTIONS.length + '</div>' +
+        '<div class="ticks">' + ticks + '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderQuestion() {
+    var q = QUESTIONS[state.step];
+    var picked = state.picks[state.step];
+    var optionsHtml = q.options.map(function (opt, i) {
+      var isSelected = picked === opt[1];
+      return (
+        '<button class="option' + (isSelected ? ' selected' : '') + '" data-idx="' + i + '">' +
+          '<span class="num">' + (i + 1) + '</span>' +
+          '<span>' + opt[0] + '</span>' +
+        '</button>'
+      );
+    }).join("");
+
+    app.innerHTML =
+      renderProgress() +
+      '<div class="card">' +
+        '<div class="q-label">Field ' + (state.step + 1) + '</div>' +
+        '<div class="q-text">' + q.text + '</div>' +
+        '<div class="options">' + optionsHtml + '</div>' +
+        '<div class="card-actions">' +
+          '<button class="btn-ghost" id="backBtn"' + (state.step === 0 ? " disabled" : "") + '>&larr; Back</button>' +
+          '<button class="btn-primary" id="nextBtn"' + (picked ? "" : " disabled") + '>' +
+            (state.step === QUESTIONS.length - 1 ? "See assignment" : "Next") + ' &rarr;' +
+          '</button>' +
+        '</div>' +
+      '</div>';
+
+    var optionButtons = app.querySelectorAll(".option");
+    optionButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var idx = parseInt(btn.getAttribute("data-idx"), 10);
+        state.picks[state.step] = q.options[idx][1];
+        renderQuestion();
+      });
+    });
+
+    var backBtn = document.getElementById("backBtn");
+    backBtn.addEventListener("click", function () {
+      if (state.step > 0) {
+        state.step -= 1;
+        renderQuestion();
+      }
+    });
+
+    var nextBtn = document.getElementById("nextBtn");
+    nextBtn.addEventListener("click", function () {
+      if (!state.picks[state.step]) return;
+      if (state.step < QUESTIONS.length - 1) {
+        state.step += 1;
+        renderQuestion();
+      } else {
+        state.view = "results";
+        renderResults();
+      }
+    });
+  }
+
+  function renderResults() {
+    var scores = computeScores();
+    var ranked = Object.keys(scores)
+      .map(function (role) { return { role: role, score: scores[role] }; })
+      .sort(function (a, b) { return b.score - a.score; });
+
+    var maxScore = ranked[0].score || 1;
+
+    var rowsHtml = ranked.map(function (entry, i) {
+      var info = ROLES[entry.role];
+      var pct = Math.round((entry.score / maxScore) * 100);
+      var isTop = i === 0;
+      var dayToDayHtml = info.dayToDay.map(function (item) { return "<li>" + item + "</li>"; }).join("");
+      var skillsHtml = info.skills.map(function (item) { return "<li>" + item + "</li>"; }).join("");
+
+      return (
+        '<div class="role-row' + (isTop ? " top open" : "") + '" data-role="' + i + '">' +
+          '<button class="role-summary" data-toggle="' + i + '">' +
+            '<span class="role-rank mono">' + (i + 1) + '</span>' +
+            '<span class="role-main">' +
+              '<span class="role-name">' + entry.role + ' <span class="role-code">' + info.code + '</span></span>' +
+              '<span class="role-bar-track"><span class="role-bar-fill" style="width:' + pct + '%"></span></span>' +
+            '</span>' +
+            '<span class="tier-pill">' + info.tier + '</span>' +
+            '<span class="chevron">&#9660;</span>' +
+          '</button>' +
+          '<div class="role-detail">' +
+            '<div class="role-detail-inner">' +
+              '<p class="detail-summary">' + info.summary + '</p>' +
+              '<div class="detail-section">' +
+                '<div class="detail-label">Day-to-day</div>' +
+                '<ul>' + dayToDayHtml + '</ul>' +
+              '</div>' +
+              '<div class="detail-section">' +
+                '<div class="detail-label">Skills that matter most</div>' +
+                '<ul>' + skillsHtml + '</ul>' +
+              '</div>' +
+              '<div class="detail-section">' +
+                '<div class="detail-label">How to get started</div>' +
+                '<div class="onramp-box">' + info.onramp + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join("");
+
+    app.innerHTML =
+      '<div class="results-head">' +
+        '<h2>Recommended assignments</h2>' +
+        '<span>Ranked by fit &mdash; tap a role to open its file</span>' +
+      '</div>' +
+      rowsHtml +
+      '<div class="restart-row"><button class="btn-ghost" id="restartBtn">&#8634; Retake intake</button></div>';
+
+    app.querySelectorAll("[data-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var row = btn.closest(".role-row");
+        row.classList.toggle("open");
+      });
+    });
+
+    document.getElementById("restartBtn").addEventListener("click", function () {
+      state.step = 0;
+      state.picks = new Array(QUESTIONS.length).fill(null);
+      state.view = "quiz";
+      renderQuestion();
+    });
+  }
+
+  stampCaseTag();
+  renderQuestion();
+})();
+</script>
